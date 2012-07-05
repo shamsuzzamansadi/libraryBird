@@ -1,4 +1,4 @@
 libraryBird
 ===========
 
-Its an complete library system which is portable. It's underconstruction we will upload it soon.
+Its an complete library system which is portable. Our language is C++ and use QT for UI.
