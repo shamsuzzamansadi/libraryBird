@@ -32,6 +32,15 @@
 
  QSqlError initDb()
  {
+     QSqlDatabase dbtest = QSqlDatabase::addDatabase("QMYSQL");
+     dbtest.setHostName("localhost");
+     dbtest.setUserName("root");
+     dbtest.setPassword("");
+     dbtest.setDatabaseName("mysql");
+     dbtest.open();
+     QSqlQuery qsqltest(dbtest);
+     qsqltest.exec(QString("create database if not exists libbird"));
+     dbtest.close();
      QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
      db.setHostName("localhost");
      db.setUserName("root");
