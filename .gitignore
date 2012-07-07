@@ -1,0 +1,6 @@
+bookdelegate.o
+bookwindow.o
+main.o
+moc_bookwindow.o
+qrc_books.o
+books
