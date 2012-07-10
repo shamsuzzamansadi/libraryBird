@@ -58,7 +58,7 @@ bool Books::setupDb(QString dbname)
             QSqlQuery query(db);
             query.exec("CREATE TABLE Books (name VARCHAR(32), author VARCHAR(16),isbn VARCHAR(32),quantity VARCHAR(16),available VARCHAR(16),studentid VARCHAR(16))");
         }
-        // create a new model and use the contacts table
+        // create a new model and use the books table
         model = new QSqlTableModel(this,db);
         model->setTable("Books");
         // All changes to the model will be applied immediately to the database
