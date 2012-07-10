@@ -2,7 +2,7 @@ LibraryBird:
 ===========
 
 It's an open source(GPL licensed) Portable (cross-platform) Library system which is written by C++ and for UI(UserInterface) we use QT.
-Still now its ustable and may have some errors. We are tring to fix it. 
+Still now its under development we are working. If you are interested in this project then please contribute. 
 
 Developer:
 ==========
