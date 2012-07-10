@@ -31,6 +31,7 @@ private slots:
     void on_actionDelete_triggered();
     void on_actionEdit_triggered();
     void on_actionNew_triggered();
+    void on_actionQuit_triggered();
 };
 
 #endif // BOOKS_H

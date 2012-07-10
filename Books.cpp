@@ -165,3 +165,7 @@ void Books::on_actionDelete_triggered()
         }
     }
 }
+void Books::on_actionQuit_triggered()
+{
+    close();
+}
