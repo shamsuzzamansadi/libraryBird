@@ -56,7 +56,7 @@ bool Books::setupDb(QString dbname)
         if(!found)
         {
             QSqlQuery query(db);
-            query.exec("CREATE TABLE Books (name VARCHAR(32), author VARCHAR(16))");
+            query.exec("CREATE TABLE Books (name VARCHAR(32), author VARCHAR(16),isbn VARCHAR(32),quantity VARCHAR(16),available VARCHAR(16),studentid VARCHAR(16))");
         }
         // create a new model and use the contacts table
         model = new QSqlTableModel(this,db);
@@ -97,6 +97,10 @@ void Books::on_actionNew_triggered()
     NewBook dlg(this);
     dlg.resetName();
     dlg.resetAuthor();
+    dlg.resetIsbn();
+    dlg.resetQuantity();
+    dlg.resetAvailable();
+    dlg.resetStudentid();
 
     if(dlg.exec() == QDialog::Accepted && dlg.name().length() > 0 )
     {
@@ -104,6 +108,10 @@ void Books::on_actionNew_triggered()
         QSqlRecord rec = model->record();
         rec.setValue("name",dlg.name());
         rec.setValue("author",dlg.Author());
+        rec.setValue("isbn",dlg.isbn());
+        rec.setValue("quantity",dlg.quantity());
+        rec.setValue("available",dlg.available());
+        rec.setValue("studentid",dlg.studentid());
         // insert a new record (-1)
         model->insertRecord(-1,rec);
     }
@@ -120,11 +128,19 @@ void Books::on_actionEdit_triggered()
         NewBook dlg(this);
         dlg.setName(rec.value("name").toString());
         dlg.setAuthor(rec.value("author").toString());
+        dlg.setIsbn(rec.value("isbn").toString());
+        dlg.setQuantity(rec.value("quantity").toString());
+        dlg.setAvailable(rec.value("available").toString());
+        dlg.setStudentid(rec.value("studentid").toString());
 
         if(dlg.exec() == QDialog::Accepted)
         {
             rec.setValue("name",dlg.name());
             rec.setValue("auhtor",dlg.Author());
+            rec.setValue("isbn",dlg.isbn());
+            rec.setValue("quantity",dlg.quantity());
+            rec.setValue("available",dlg.available());
+            rec.setValue("studentid",dlg.studentid());
             // save modified data
             model->setRecord(sample.row(),rec);
         }
