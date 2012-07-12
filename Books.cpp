@@ -1,6 +1,7 @@
 #include <QtGlobal>
 #include <QSqlDatabase>
 #include <QSqlTableModel>
+ #include <QSqlQueryModel>
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlRecord>
@@ -8,7 +9,7 @@
 #include "Books.h"
 #include "ui_Books.h"
 #include "newbook.h"
-
+#include "finddlg.h"
 Books::Books(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Books)
@@ -58,7 +59,7 @@ bool Books::setupDb(QString dbname)
             QSqlQuery query(db);
             query.exec("CREATE TABLE Books (name VARCHAR(32), author VARCHAR(16),isbn VARCHAR(32),quantity VARCHAR(16),available VARCHAR(16),studentid VARCHAR(16))");
         }
-        // create a new model and use the contacts table
+        // create a new model and use the books table
         model = new QSqlTableModel(this,db);
         model->setTable("Books");
         // All changes to the model will be applied immediately to the database
@@ -107,7 +108,7 @@ void Books::on_actionNew_triggered()
         // create a record from the current model
         QSqlRecord rec = model->record();
         rec.setValue("name",dlg.name());
-        rec.setValue("author",dlg.Author());
+        rec.setValue("author",dlg.author());
         rec.setValue("isbn",dlg.isbn());
         rec.setValue("quantity",dlg.quantity());
         rec.setValue("available",dlg.available());
@@ -136,7 +137,7 @@ void Books::on_actionEdit_triggered()
         if(dlg.exec() == QDialog::Accepted)
         {
             rec.setValue("name",dlg.name());
-            rec.setValue("auhtor",dlg.Author());
+            rec.setValue("author",dlg.author());
             rec.setValue("isbn",dlg.isbn());
             rec.setValue("quantity",dlg.quantity());
             rec.setValue("available",dlg.available());
@@ -168,4 +169,46 @@ void Books::on_actionDelete_triggered()
 void Books::on_actionQuit_triggered()
 {
     close();
+}
+
+void Books::on_actionFind_triggered()
+{
+   finddlg fndl(this);
+   if (fndl.exec() == QDialog::Accepted)
+   {
+       QString sc = fndl.searchtext();
+       QString st = fndl.searchfield();
+
+       QTreeView *view = ui->treeView;
+
+
+
+           // create a new model and use the books table
+           QSqlQueryModel *sqlmodel = new QSqlQueryModel;
+           QString sqlq = "select * from books where ";
+           sqlq.append(st);
+           sqlq.append(" LIKE '%");
+           sqlq.append(sc);
+           sqlq.append("%'");
+        //   qDebug(sqlq.toUtf8().constData());
+           sqlmodel->setQuery(sqlq);
+
+           view->setModel(sqlmodel);
+
+
+
+
+
+
+
+
+   }
+
+}
+
+void Books::on_actionReset_triggered()
+{
+    QString filename = QDir::homePath() + QDir::separator() + "books.db";
+    setupDb(filename);
+
 }

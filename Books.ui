@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuEdit">
@@ -38,7 +38,15 @@
     <addaction name="actionDelete"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuSearch">
+    <property name="title">
+     <string>Search</string>
+    </property>
+    <addaction name="actionFind"/>
+    <addaction name="actionReset"/>
+   </widget>
    <addaction name="menuEdit"/>
+   <addaction name="menuSearch"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -58,6 +66,16 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="text">
+    <string>Find</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
    </property>
   </action>
  </widget>

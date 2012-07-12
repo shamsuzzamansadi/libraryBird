@@ -2,6 +2,7 @@
 #define NEWBOOK_H
 
 #include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
     class NewBook;
@@ -23,7 +24,7 @@ public:
     void resetName();
 
     void setAuthor(const QString p);
-    QString Author() const;
+    QString author() const;
     void resetAuthor();
 
     void setIsbn(const QString i);
@@ -46,12 +47,13 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
-
+    void done(int r);
 private:
     Ui::NewBook *ui;
 
 private slots:
     void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 };
 
 #endif // NEWBOOK_H

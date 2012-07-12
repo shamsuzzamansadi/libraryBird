@@ -33,7 +33,7 @@ void NewBook::setAuthor(const QString a)
     ui->authorEdit->setText(a);
 }
 
-QString NewBook::Author() const
+QString NewBook::author() const
 {
     return  ui->authorEdit->text();
 }
@@ -111,6 +111,31 @@ void NewBook::changeEvent(QEvent *e)
     }
 }
 
+void NewBook::done(int r)
+{
+    if(QDialog::Accepted == r)  // ok was pressed
+    {
+        if(ui->quantityEdit->text().toInt() > 0)   // validate the data somehow
+        {
+            QDialog::done(r);
+            return;
+        }
+        else
+        {
+            QMessageBox msgBox;
+            msgBox.setText("Invalid Quantity, must be a positive integer");
+            msgBox.exec();
+            return;
+        }
+    }
+    else    // cancel, close or exc was pressed
+    {
+        QDialog::done(r);
+        return;
+    }
+
+}
+
 void NewBook::on_buttonBox_accepted()
 {
     setName(ui->nameEdit->text());
@@ -119,4 +144,9 @@ void NewBook::on_buttonBox_accepted()
     setQuantity(ui->quantityEdit->text());
     setAvailable(ui->availableEdit->text());
     setStudentid(ui->studentidEdit->text());
+}
+
+void NewBook::on_buttonBox_rejected()
+{
+
 }
