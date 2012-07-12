@@ -136,7 +136,7 @@ void Books::on_actionEdit_triggered()
         if(dlg.exec() == QDialog::Accepted)
         {
             rec.setValue("name",dlg.name());
-            rec.setValue("auhtor",dlg.Author());
+            rec.setValue("author",dlg.Author());
             rec.setValue("isbn",dlg.isbn());
             rec.setValue("quantity",dlg.quantity());
             rec.setValue("available",dlg.available());
