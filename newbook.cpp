@@ -148,5 +148,5 @@ void NewBook::on_buttonBox_accepted()
 
 void NewBook::on_buttonBox_rejected()
 {
-
+   close;
 }
